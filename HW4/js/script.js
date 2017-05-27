@@ -38,20 +38,24 @@ console.log(numbersBetween(10, 15)); // 11, 12, 13, 14
  Расчет чисел должен идти до 100
  */
 function fizzBuzz(num) {
-    for (num = 0; num < 100; num++) {
         if(num % 3 === 0 || num % 5 === 0) {
     if(num % 3 === 0 && num % 5 === 0) {
-        console.log("FizzBuzz");
+        return("FizzBuzz");
     }else if(num % 3 === 0) {
-        console.log("Fizz");
+        return("Fizz");
     }else {
-        console.log("Buzz");
+        return("Buzz");
     }
 }else {
-    console.log(num);
+    return(num);
     }
-        }
 }
+function FizzBuzzHund(fizzBuzz) {
+for (let num = 0; num < 100; num++) {
+    console.log(fizzBuzz(num));
+}
+}
+FizzBuzzHund(fizzBuzz);
 fizzBuzz(1); // 1
 fizzBuzz(2); // 2
 fizzBuzz(3); // 'Fizz'
