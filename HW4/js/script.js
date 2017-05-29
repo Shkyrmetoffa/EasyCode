@@ -73,10 +73,7 @@ function getTypeVal(arr1) {
     for(i = 0; i < arr1.length; i++) {
         if(Array.isArray(arr1[i])) {
             newArr.push(arr1[i]);
-        } else if (arr1[i] === null) {
-            newArr.push('null');
-        }
-        else {
+        } else {
             newArr.push(typeof arr1[i]);
         }
     }
@@ -103,17 +100,18 @@ let array = Array.from({ length: 35 }).map(
 function solution(arr) {
     let i;
     let newArr = [];
-for(i = 0; i<arr.length; i++) {
-    let elem = arr[i];
-    function checkElem() {
-        if(isNaN(elem.age)) {
-            elem['unknownAge'] = 'true';
-            newArr.push(elem);
+
+    for(i = 0; i<arr.length; i++) {
+        let elem = arr[i];
+            checkElem(elem, newArr);
         }
-    }
-    checkElem(elem);
-}
     return newArr;
+}
+function checkElem(elem, newArr) {
+    if(isNaN(elem.age)) {
+        elem['unknownAge'] = 'true';
+        newArr.push(elem);
+    }
 }
 function returnArr(argument) {
    console.log(argument);
