@@ -10,15 +10,18 @@
 let arr1 = [ 'a', 0, 0, 'b', null, 'c', 'd', 0, 1, false, 0, 1, 0, 3, [], 0, 1, 9, 0, 0, {}, 0, 0, 9 ];
 
 function moveZeroToEnd(arr) {
+    let tempArr = [];
+    let elem = [];
     let newArr = [];
     for (let i = 0; i < arr.length; i++) {
-       if (arr[i] === 0) {
-           arr.splice(i, 1);
-           // arr.splice(arr.length, 0, 0);
-           newArr = arr;
+       if (arr[i] !== 0) {
+           tempArr.push(arr[i]);
+       } else {
+           elem.push(arr[i]) ;
        }
     }
-   return newArr;
+    newArr = tempArr.concat(elem);
+    return newArr;
 }
 console.log(moveZeroToEnd(arr1));
 /*
@@ -31,26 +34,26 @@ console.log(moveZeroToEnd(arr1));
 
  */
 // let arr = [0, 200, 10, 25, 15];
-//     function compareNumeric(a, b) {
-//         if (a > b) return 1;
-//         if (a < b) return -1;
-//     }
-// let newArrSort =arr.sort(compareNumeric);
-//     function minimalNumber(arr) {
-//         return arr[0] + arr[1];
-//     }
-// console.log(minimalNumber(newArrSort));
+    function compareNumeric(a, b) {
+        if (a > b) return 1;
+        if (a < b) return -1;
+    }
+let newArrSort =arr.sort(compareNumeric);
+    function minimalNumber(arr) {
+        return arr[0] + arr[1];
+    }
+console.log(minimalNumber(newArrSort));
 // /*
 //  3. Напишите функцию которая меняет местами имя и фамилию
 //  */
-// function nameShuffler(string) {
-//     let arr = string.split(' ').reverse();
-//     let newName = arr.join(' ');
-//     return newName;
-// }
-// console.log(nameShuffler('john McClane'));
-// console.log(nameShuffler('Arnold Schwarzenegger'));
-// console.log(nameShuffler('James Bond'));
+function nameShuffler(string) {
+    let arr = string.split(' ').reverse();
+    let newName = arr.join(' ');
+    return newName;
+}
+console.log(nameShuffler('john McClane'));
+console.log(nameShuffler('Arnold Schwarzenegger'));
+console.log(nameShuffler('James Bond'));
 // /*
 //  // !
 //  4. Напишите функцию которая принимает массив с именами и возвращает массив
@@ -73,14 +76,3 @@ function getName(arrName) {
 }
 console.log(getName(['jo', 'nelson', 'jurie']));
 console.log(getName(['KARLY', 'DANIEL', 'KELSEY']));
-// //@SUPER
-// /*
-//  1. Найдите число отсутствующее в заданной последовательности
-//
-//  example:
-//  [1,3,5,9] => 7
-//  [0,8,16,32] => 24
-//  [4, 6, 8, 10] => 2 // число сначала
-//  [0,16,24,32] => 8
-//
-//  */
