@@ -71,20 +71,18 @@ let jun = {};
 
 
 function methodCounter(obj, name, num, fn) {
-    let flag = 0; // indicator stoped
+    let flag = num; // indicator stoped
 
-    return (obj[name] = function() {
-        flag++;
-        if (flag >= 0 && flag <= num) {
-
-            console.log('что-то делает, пока вызов <= num');
-            return;
+    obj[name] = function(...args) {
+        flag--;
+        if (flag >= 0) {
+            fn(args);
         } else {
             console.log('ERROR ! add more methods');
             return;
         }
 
-    });
+    };
 }
 methodCounter(jun, 'logger', 2, function(args) {
     let sum = args.reduce(function(a, b) {
