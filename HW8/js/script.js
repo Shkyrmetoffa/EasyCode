@@ -34,37 +34,20 @@ console.log(stringBuffer('Привет')); // Замыкания Использ�
  * */
 
 function validBraces(str) {
-    let arr = [];
-    arr.push(str);
-    //First method
-    // if (str === '(){}[]' || str === '([{}])') {
-    //     console.log(true);
-    // } else if (str === '(}' || str === '[(])') {
-    //     console.log(false);
-    // }
-    //Second method
-    switch (arr[0]) {
-        case '(){}[]':
-            console.log('true');
-            break;
-
-        case '(}':
-            console.log('false');
-            break;
-
-        case '[(])':
-            console.log('false');
-            break;
-        case '([{}])':
-            console.log('true');
-            break;
+    while (str.includes('[]') || str.includes('{}') || str.includes('()')) {
+        str = str.replace('[]', '').replace('{}', '').replace('()', '');
+    }
+    if (str.length) {
+        return false;
+    } else {
+        return true;
     }
 }
 
-validBraces('(){}[]'); //=> returns true
-validBraces('(}'); //=> returns false
-validBraces('[(])'); // => returns false
-validBraces('([{}])'); //=> returns true
+console.log(validBraces('(){}[]')); //=> returns true
+console.log(validBraces('(}')); //=> returns false
+console.log(validBraces('[(])')); // => returns false
+console.log(validBraces('([{}])')); //=> returns true
 /*
  *
  * TASK 3
@@ -75,17 +58,20 @@ validBraces('([{}])'); //=> returns true
  *
  * */
 
-// function makeCallback(fn) {
-//     for (let i = 1; i <= 10; i++) {
-//         setTimeout(function() {
-//             console.log(i);
-//         }, i * 1000);
-//     }
-// }
+function makeCallback(fn) {
+    for (let i = 1; i <= 10; i++) {
+        setTimeout(function() {
+            console.log(i);
+            if (i == 10) {
+                fn();
+            }
+        }, i * 1000);
+    }
+}
 
-// makeCallback(function() {
-//     console.log('THE LAST LAST comment');
-// });
+makeCallback(function() {
+    console.log('THE LAST LAST comment');
+});
 // @SUPER
 
 /*
@@ -100,25 +86,12 @@ validBraces('([{}])'); //=> returns true
  *
  * */
 
-let memoized = function(key) {
-    this.values = this.values || {};
-    console.log('cached');
-    return this.values[key] !== undefined ?
-        this.value[key] :
-        (this.value[key] = this.apply(this, arguments));
-};
+// function sum(num) {
 
-function sum(num) {
-    let i;
-    let sum = 0;
-    for (i = 1; i <= num; i++) {
-        sum += i;
-    }
-    return sum;
-}
+// }
 
-console.log(sum(5)); // 15 Значение кешировано
-console.log(sum(5)); // 15 Значение взято из кэша
+// console.log(sum(5)); // 15 Значение кешировано
+// console.log(sum(5)); // 15 Значение взято из кэша
 
-console.log(sum(6)); // 21 Кешировано
-console.log(sum(6)); // 21 Значение взято из кэша
+// console.log(sum(6)); // 21 Кешировано
+// console.log(sum(6)); // 21 Значение взято из кэша
