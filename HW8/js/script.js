@@ -86,12 +86,20 @@ makeCallback(function() {
  *
  * */
 
-// function sum(num) {
+function sum(n) {
+    let summ = 0;
+    for (let i = 0; i <= n; i++) {
+        summ += i;
+    }
+    if (sum[n] == undefined) {
+        sum[n] = summ;
+        console.log(`${sum[n]} Новое значение`);
+    } else {
+        console.log(`${sum[n]} Из кеша`);
+    }
+}
+console.log(sum(5)); // 15 Значение кешировано
+console.log(sum(5)); // 15 Значение взято из кэша
 
-// }
-
-// console.log(sum(5)); // 15 Значение кешировано
-// console.log(sum(5)); // 15 Значение взято из кэша
-
-// console.log(sum(6)); // 21 Кешировано
-// console.log(sum(6)); // 21 Значение взято из кэша
+console.log(sum(6)); // 21 Кешировано
+console.log(sum(6)); // 21 Значение взято из кэша
