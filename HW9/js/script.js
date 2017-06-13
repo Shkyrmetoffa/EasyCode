@@ -43,6 +43,7 @@ let developer1 = {
     skills: ['JavaScript', 'linux', 'html', 'OOP', 'Node.js'],
     requires: ['Node.js', 'JavaScript', 'OOP'],
     goodDev: goodDev,
+    getArr: getArr,
 };
 let developer2 = {
     experience: [
@@ -53,23 +54,22 @@ let developer2 = {
     ],
     requires: ['java', 'json', 'c++', 'JavaScript'],
     goodDev: goodDev,
-    // getArr() {
-    //     console.log(this.experience);
-    //     // return this.experience.map(elem => elem.technology);
-    // }
+    getArr: getArr,
 };
+
+function getArr() {
+    return this.skills ?
+        this.skills :
+        this.experience.map(elem => elem.technology);
+}
 
 function goodDev(dev) {
     this.requires.forEach(elem => {
-        // console.log(dev.skills);
-        // console.log(elem);
-        // if (
-        //     dev.skills.includes(elem)
-        // ) {
-        //     return `required: ${elem} ...sucsess`;
-        // } else {
-        //     return `required: ${elem} ...fail`;
-        // }
+        if (dev.getArr.call(dev).includes(elem)) {
+            console.log(`required: ${elem} ...sucsess`);
+        } else {
+            console.log(`required: ${elem} ...fail`);
+        }
     });
 }
 
@@ -119,8 +119,7 @@ function myFilter(key) {
 }
 // {age:15, name:'c'}, {age:25, name:'a'} {age:100, name:'b'}
 
-console.log(myObject.myFilter('age')); // when i comment someone console.log it works correctly...
-//Why?
+console.log(myObject.myFilter('age'));
 console.log(myObject.myFilter('name'));
 
 // {age:25, name:a}, {age:100, name: b} ...
