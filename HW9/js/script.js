@@ -248,39 +248,27 @@ console.log(findNum([1, 3, 5, 9]));
 
 let junior = {};
 
-// function addMethod(object, name, fn) {
-//     //first add to obj name and assign value - func
-//     object[name] = (args) => {
-//         //return args.length and obj[key].length
-//         return object[arguments.length].call(object)
-//     };
-//     object[fn.length] = function(args) {
-//         return (args);
-//     }
-// }
 function addMethod(object, name, fn) {
     //first add to obj name and assign value - func
     object[name] = (...args) => {
         //return args.length of obj
-        return object[args.length].call(object)
+        return object[args.length].call(object);
     };
-    object[fn.length] = (args) => {
-        return fn(args)
+    object[fn.length] = args => {
+        return fn(args);
     }
 }
-
-
-addMethod(junior, "ok", function() {
-    console.log("zero arguments");
+addMethod(junior, 'ok', function() {
+    console.log('zero arguments');
 });
-addMethod(junior, "ok", function(one) {
-    console.log("one arguments");
+addMethod(junior, 'ok', function(one) {
+    console.log('one arguments');
 });
-addMethod(junior, "ok", function(one, two) {
-    console.log("two arguments");
+addMethod(junior, 'ok', function(one, two) {
+    console.log('two arguments');
 });
-addMethod(junior, "ok", function(one, two, three) {
-    console.log("three arguments");
+addMethod(junior, 'ok', function(one, two, three) {
+    console.log('three arguments');
 });
 
 junior.ok(); //'zero arguments'
