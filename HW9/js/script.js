@@ -226,3 +226,64 @@ let findNum = arrStep => {
     });
 };
 console.log(findNum([1, 3, 5, 9]));
+////////@ TODO -- LVL Strong Junior
+/*
+ *
+ * TASK 1
+ * Напишите функцию которая принимает 3 аргумента:*
+ *
+ *  - объект к которому привязывается метод
+ *  - Имя свойства с которым связывается метод
+ *  - Объявление привязываемого метода( функция )
+ *
+ *
+ *  Если количество аргументов у функции fn совпадает с переданными
+ *  параметрами тогда сохраняет метод в замыкании
+ *  и привязывает функцию к методу объекта
+ *
+ *  при вызове одного и того же метода с разным количеством аргументов, 
+ *  должно давать различный результат
+ *
+ * */
+
+let junior = {};
+
+// function addMethod(object, name, fn) {
+//     //first add to obj name and assign value - func
+//     object[name] = (args) => {
+//         //return args.length and obj[key].length
+//         return object[arguments.length].call(object)
+//     };
+//     object[fn.length] = function(args) {
+//         return (args);
+//     }
+// }
+function addMethod(object, name, fn) {
+    //first add to obj name and assign value - func
+    object[name] = (...args) => {
+        //return args.length of obj
+        return object[args.length].call(object)
+    };
+    object[fn.length] = (args) => {
+        return fn(args)
+    }
+}
+
+
+addMethod(junior, "ok", function() {
+    console.log("zero arguments");
+});
+addMethod(junior, "ok", function(one) {
+    console.log("one arguments");
+});
+addMethod(junior, "ok", function(one, two) {
+    console.log("two arguments");
+});
+addMethod(junior, "ok", function(one, two, three) {
+    console.log("three arguments");
+});
+
+junior.ok(); //'zero arguments'
+junior.ok(1); //'one arguments'
+junior.ok(1, 2); // 'two arguments'
+junior.ok(1, 2, 3); // 'three arguments'
