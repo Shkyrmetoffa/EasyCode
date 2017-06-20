@@ -77,35 +77,46 @@ console.log(ezjQuery.add('body').add('div', 'hello').add('h1')); //<body></body>
  *
  *
  */
-
 // example
-var ezjQuery = {};
-ezjQuery.add = function(teg) {
-    if (typeof teg === 'string') {
-        teg = `<${teg}></${teg}>`;
-
-        if (teg.includes('><')) {
-            let tegs = teg.replace('><', `>${teg}<`); // как мне сюда вставить следующий тег? Циклом? 
-            console.log(tegs);
-        }
-        return this;
-    }
-    return this;
+let a = function() {
+    return (
+        `<${arguments[0]}>` +
+        (arguments[1] == undefined ? '' : arguments[1]) +
+        `</${arguments[0]}>`
+    );
 };
-var helloList = ezjQuery
+
+let tegs1 = function() {
+    let string = '';
+    tegs1.add = function(teg, add) {
+        string =
+            string.slice(0, string.indexOf('></') + 1) +
+            $(teg, add) +
+            string.slice(string.indexOf('></') + 1, string.length);
+        return this;
+    };
+    tegs1.render = function() {
+        let ret = string;
+        string = '';
+        return ret;
+    };
+};
+var ezjQuery1 = tegs1;
+ezjQuery1();
+var helloList = ezjQuery1
     .add('body') // <body></body>
     .add('div') // <body><div></div></body>
     .add('ul') // <body><div><ul></ul></div></body>
-    .add('li', 'Hello'); //<body><div><ul><li>Hello</li></ul></div></body>
-// .render();
+    .add('li', 'Hello') //<body><div><ul><li>Hello</li></ul></div></body>
+    .render();
 console.log(helloList); // <body><div><ul><li>Hello</li></ul></div></body>
 //  Обратите внимание, что после вызова render создание строки началось сначала
 
-var bodyDiv = ezjQuery
+var bodyDiv = ezjQuery1
     .add('body') //<body></body>
-    .add('div'); //<body><div></div></body>
-// .render();
-console.log(bodyDiv); //<body><div></div></body>
+    .add('div') //<body><div></div></body>
+    .render();
+console.log(bodyDiv); //<body><div
 
 // Для выполнивших все задания
 // сделайте document.write(helloList) увидите результат :)
