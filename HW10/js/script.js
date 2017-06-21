@@ -78,31 +78,28 @@ console.log(ezjQuery.add('body').add('div', 'hello').add('h1')); //<body></body>
  *
  */
 // example
-let a = function() {
-    return (
-        `<${arguments[0]}>` +
-        (arguments[1] == undefined ? '' : arguments[1]) +
-        `</${arguments[0]}>`
-    );
-};
+// let a = function() {
+//     return (
+//         `<${arguments[0]}>` +
+//         (arguments[1] == undefined ? '' : arguments[1]) +
+//         `</${arguments[0]}>`
+//     );
+// };
 
-let tegs1 = function() {
-    let string = '';
-    tegs1.add = function(teg, add) {
-        string =
-            string.slice(0, string.indexOf('></') + 1) +
-            $(teg, add) +
-            string.slice(string.indexOf('></') + 1, string.length);
+let ezjQuery1 = {
+    tegArr: { tBegin: [], tEnd: [] },
+    add: function(teg, content = '') {
+        this.tegArr.tBegin.push(`<${teg}>`);
+        this.tegArr.tBegin.push(`${content}`);
+        this.tegArr.tEnd.push(`</${teg}>`);
         return this;
-    };
-    tegs1.render = function() {
-        let ret = string;
-        string = '';
-        return ret;
-    };
-};
-var ezjQuery1 = tegs1;
-ezjQuery1();
+    },
+    render: function() {
+        let joinArr = this.tegArr.tBegin.concat(this.tegArr.tEnd);
+        this.tegArr = { tBegin: [], tEnd: [] };
+        return joinArr.join('');
+    },
+}
 var helloList = ezjQuery1
     .add('body') // <body></body>
     .add('div') // <body><div></div></body>
