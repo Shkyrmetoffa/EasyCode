@@ -91,7 +91,7 @@ let ezjQuery1 = {
     add: function(teg, content = '') {
         this.tegArr.tBegin.push(`<${teg}>`);
         this.tegArr.tBegin.push(`${content}`);
-        this.tegArr.tEnd.push(`</${teg}>`);
+        this.tegArr.tEnd.unshift(`</${teg}>`);
         return this;
     },
     render: function() {
