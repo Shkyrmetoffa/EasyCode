@@ -24,8 +24,12 @@ PhoneApp.prototype.checkNumber = function(num) {
     }
 };
 PhoneApp.prototype.formatedNumber = function(num) {
+    let code = num.slice(0, 3);
+    let startNum = num.slice(3, 6);
+    let middle = num.slice(6, 8);
+    let end = num.slice(8, 10);
     console.log(
-        `(${num[0]}${num[1]}${num[2]}) ${num[3]}${num[4]}${num[5]}-${num[6]}${num[7]}-${num[8]}${num[9]}`
+        `(${code}) ${startNum}-${middle}-${end}`
     );
 };
 PhoneApp.prototype.createUserCard = function(id, name, lastName, phone) {
