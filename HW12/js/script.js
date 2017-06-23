@@ -116,3 +116,24 @@ console.log('newStudent3', newStudent3.watchSeries());
 
 console.log(newWorker1.name);
 console.log(newWorker2.working());
+// @SUPER
+
+/*
+ * TASK 0
+ * Создайте функцию обертку над другой функцией
+ * Каждый раз при вызове внутренней функции в консоле будут отображаться аргументы функции
+ * которую мы обернули
+ */
+let sumFunc = function sum(num) {
+    return num += 2;
+};
+
+function decorator(func) {
+    return function() {
+        let result = func.apply(this, arguments)
+        console.log(`Function result: ${result}`);
+        return result;
+    }
+}
+sumFunc = decorator(sumFunc);
+sumFunc(5);
