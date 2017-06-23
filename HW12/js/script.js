@@ -34,10 +34,37 @@
  * первая функция и возвращать объект и функцию
  *
  * */
+function Http() {
+    // constructor
+}
+Http.prototype.createServer = function(ctx, next) {
+    this.ctx = {
+        req: {
+            PORT: 8800,
+            url: '/shkyrmetoffa/github.com',
+            res: {},
+            status: 404,
+            message: 'you should type your email',
+            header: {
+                contenttype: 'application/json',
+            },
+        },
+    };
+    this.next = function() {
+        return this;
+    };
+    return this;
+};
+Http.prototype.listen = function(host, port) {
+    console.log(`Server running on https://${host}:${port}`);
+    return this;
+};
 
-const server = new Http().createServer(function(ctx, next) {
-    console.log(ctx);
-}).listen(3000, 'localhost');
+const server = new Http()
+    .createServer(function(ctx, next) {
+        console.log(ctx);
+    })
+    .listen(3000, 'localhost');
 // TASK 1
 // Создать класс Human, у которого будут свойства обычного человека:
 // имя, возраст, пол, рост, вес.
@@ -47,7 +74,8 @@ const server = new Http().createServer(function(ctx, next) {
 //
 // Создать несколько экземпляров классов Worker и Student, вывести их в консоль.
 // Убедиться что они имеют поля родительского класса Human
-function Human() { //Class Human
+function Human() {
+    //Class Human
     this.name = 'John';
     this.age = 30;
     this.sex = 'male';
@@ -55,7 +83,8 @@ function Human() { //Class Human
     this.weight = 77;
 }
 
-function Worker(place, salary) { // class worker with working method
+function Worker(place, salary) {
+    // class worker with working method
     this.work = place;
     this.salary = salary;
     this.working = function() {
@@ -64,7 +93,8 @@ function Worker(place, salary) { // class worker with working method
 }
 Worker.prototype = new Human(); // inheritance of Human
 
-function Student(_education, _grant) { // Class Student with watchSeries method
+function Student(_education, _grant) {
+    // Class Student with watchSeries method
     this.education = _education;
     this.grant = _grant;
     this.watchSeries = function() {
@@ -79,7 +109,6 @@ var newStudent3 = new Student('KNURE', 39658);
 
 var newWorker1 = new Worker('It', 1200); //instances of Student
 var newWorker2 = new Worker('Economyst', 850);
-
 
 console.log('newStudent1', newStudent1.age);
 console.log('newStudent2', newStudent2.education);
