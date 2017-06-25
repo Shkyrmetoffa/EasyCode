@@ -37,8 +37,8 @@
 function Http() {
     // constructor
 }
-Http.prototype.createServer = function(ctx, next) {
-    this.ctx = {
+Http.prototype.createServer = function(func) {
+    let ctx = {
         req: {
             PORT: 8800,
             url: '/shkyrmetoffa/github.com',
@@ -46,18 +46,18 @@ Http.prototype.createServer = function(ctx, next) {
             status: 404,
             message: 'you should type your email',
             header: {
-                contenttype: 'application/json',
+                'content-type': 'application/json',
             },
         },
     };
-    this.next = function() {
-        return this;
+    this.func = () => {
+        func.call(this, ctx, () => {});
     };
     return this;
 };
 Http.prototype.listen = function(host, port) {
     console.log(`Server running on https://${host}:${port}`);
-    return this;
+    this.func();
 };
 
 const server = new Http()
@@ -124,16 +124,29 @@ console.log(newWorker2.working());
  * Каждый раз при вызове внутренней функции в консоле будут отображаться аргументы функции
  * которую мы обернули
  */
-let sumFunc = function sum(num) {
+let sumFunc = function sum(num) { //создаем функцию, которая возвращает сумму переданного арг и записываем
+    // в переменную
     return num += 2;
 };
 
-function decorator(func) {
-    return function() {
-        let result = func.apply(this, arguments)
+function decorator(func) { // функция обёртка, которая принимает в качестве арг основную ф-ю
+    return function() { // замыкание
+        let result = func.apply(this, arguments) // передаем в функцию sumFunc контекс this и псевдомассив арг при помощи apply. Вызов записываем в переменную
         console.log(`Function result: ${result}`);
-        return result;
+        return result; // возвращаем переменную с результатом вызова sum
     }
 }
-sumFunc = decorator(sumFunc);
-sumFunc(5);
+sumFunc = decorator(sumFunc); // вызов ф-ии декоратора с параметром - ф-ей sumFunc
+sumFunc(5); // вызов ф-и с переданными ей параметрами
+// Wrapper function
+function wrap(fn) {
+    return function(...args) {
+        console.log(args);
+        fn.apply(this, args);
+    };
+}
+
+function fn(a, b) {
+    return 'сумма', a + b;
+}
+wrap(fn)(2, 4);
