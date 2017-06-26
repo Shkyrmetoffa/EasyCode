@@ -85,7 +85,6 @@ new Http()
  * Изменять функцию serverResponse и шапку цикла - нельзя
  *
  * */
-
 let startTimer = () => {
     let timer = 10;
     let serverResponse = i => {
