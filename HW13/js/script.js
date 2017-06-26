@@ -1,8 +1,4 @@
-class ParseString {
-    constructor() {}
-
-    getStrToArr(findElem, finalElem) {
-        const someWebpackModule = `module.exports = {
+const someWebpackModule = `module.exports = {
     context: '',
     entry: {
         app: "%%HOMEDIR%%/%%APP_DIR%%/%%APPNAME%%.js"
@@ -13,6 +9,10 @@ class ParseString {
         library: '[%%APPNAME%%]'
     }
    }`;
+class ParseString {
+    constructor() {}
+
+    getStrToArr(findElem, finalElem) {
         let arr = someWebpackModule.split(findElem);
         let newArr = arr
             .map((elem, i) => {
