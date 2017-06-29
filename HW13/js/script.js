@@ -85,20 +85,20 @@ new Http()
  * Изменять функцию serverResponse и шапку цикла - нельзя
  *
  * */
-let startTimer = () => {
-    let timer = 10;
-    let serverResponse = i => {
-        return setTimeout(function() {
-            console.log('zzzz');
-            console.log(i);
-        }, (timer = timer / 2));
-    };
-    for (let i = 10; i >= 1; i--) {
-        timer += timer * i;
-        serverResponse(i);
-    }
-};
-startTimer();
+// let startTimer = () => {
+//     let timer = 10;
+//     let serverResponse = i => {
+//         return setTimeout(function() {
+//             console.log('zzzz');
+//             console.log(i);
+//         }, (timer = timer / 2));
+//     };
+//     for (let i = 10; i >= 1; i--) {
+//         timer += timer * i;
+//         serverResponse(i);
+//     }
+// };
+// startTimer();
 // @ SUPER
 
 /*
@@ -114,15 +114,26 @@ startTimer();
  *
  * */
 
-// class DataBase {
-//     constructor() {}
-//     query() {
-//
-//     }
-// }
+class DataBase {
+    constructor() {}
+    query() {
+        this.counter = 5;
+        if (this.activeTimeout) {
+            clearTimeout(this.activeTimeout);
+            clearInterval(this.activeTimer);
+        }
+        this.activeTimer = setInterval(() => {
+            console.log(this.counter--);
+        }, 1000);
+        this.activeTimeout = setTimeout(() => {
+            console.log('The web server is down');
+            clearInterval(this.activeTimer);
+        }, 5000);
+    }
+}
 
-// const dataBase = new DataBase();
-// dataBase.query();
+const dataBase = new DataBase();
+dataBase.query();
 // 5
 // 4
 // 3
@@ -130,15 +141,15 @@ startTimer();
 // 1
 // console.log('The web server is down') https://www.youtube.com/watch?v=W8_Kfjo3VjU
 
-// dataBase.query();
+dataBase.query();
 // 5
 // 4
-// dataBase.query();
+dataBase.query();
 // 5
 // 4
 // 3
 // 2
-// dataBase.query();
+dataBase.query();
 // 5
 // 4
 // 3
