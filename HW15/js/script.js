@@ -35,23 +35,22 @@ solution('0123456789abcdefghijklmnop'); // false
  [25,10,[10,[15]]] => [25,10,10,15]
  [1, [2, [ {a: "b"} ] ] ] => [1, 2, {a: "b"}]
  */
-
-
-function open(arr) {
+function open(arr, outArr = []) {
     arr.map((elem, i) => {
         if (Array.isArray(elem)) {
-            open(elem);
+            open(elem, outArr);
         } else {
-            console.log(elem);
+            outArr.push(elem);
         }
     });
+    return (outArr);
 }
 
 // open([
 //     [1, 2],
 //     [3, [4]], 5, 10
 // ]);
-open([25, 10, [10, [15]]]);
+console.log(open([25, 10, [10, [15]]]));
 // open([1, [2, [{ a: "b" }]]]);
 /*
 Task 3
@@ -256,4 +255,4 @@ const PhoneBook = {
         return tag.className = name;
     }
 };
-// PhoneBook.render();
+PhoneBook.render();
