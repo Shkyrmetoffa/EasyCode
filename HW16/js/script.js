@@ -74,3 +74,15 @@ const visualArray = (arr) => {
     return emptyStr += `</ul>`;
 }
 document.body.innerHTML = visualArray(navigation);
+// 2. Напишите функцию, которая будет получать последнего родителя
+// у элемента, но не body
+function getMainParent(elem) {
+    let newElem = elem.document.parentElement;
+    if (newElem !== body) {
+        getMainParent(newElem);
+    } else {
+        return newElem;
+    }
+
+}
+getMainParent();
