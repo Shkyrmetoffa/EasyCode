@@ -8,46 +8,29 @@
  
  ИСПОЛЬЗУЙТЕ МЕТОДЫ МАССИВОВ !
 //  */
-class MatrixTransform {
-    constructor(arr) {
-        this.arr = arr;
-    }
-    changeLength(arr) {
-        if (arr.length == 2) {
-            let newArr = [
-                [],
-                [],
-                []
-            ];
-            arr.forEach((elem, i, arr) => {
-                elem.forEach((val, j, elem) => {
-                    newArr[j][i] = arr[i][j];
-                })
-            })
-            console.log(newArr);
-        } else if (arr.length == 3) {
-            let newArr = [
-                [],
-                []
-            ];
-            arr.forEach((elem, i, arr) => {
-                elem.forEach((val, j, elem) => {
-                    newArr[j][i] = arr[i][j];
-                })
-            })
-            console.log(newArr);
-        } else {
-            console.log("It's no matrix");
-        }
-
-    }
-}
-let solution2 = new MatrixTransform();
-solution2.changeLength([
+function MatrixTransform(arr) {
+    let newArr = [];
+    (arr.length == 2) ?
+    newArr = [
+        [],
+        [],
+        []
+    ]: newArr = [
+        [],
+        []
+    ];
+    arr.forEach((elem, i, arr) => {
+        elem.forEach((val, j, elem) => {
+            newArr[j][i] = arr[i][j];
+        })
+    })
+    console.log(newArr);
+};
+MatrixTransform([
     [1, 3, 5],
     [2, 4, 6]
 ]);
-solution2.changeLength([
+MatrixTransform([
     [1, 'a'],
     [2, 'b'],
     [3, 'c']
@@ -67,30 +50,27 @@ const navigation = [
         children: [{
             name: 'Компьютеры',
             children: [
-                { name: 'Ноутбуки' },
-                { name: 'Планшеты' }
-            ]
-        }]
+                { name: 'Ноутбуки' }, { name: 'Планшеты' }
+            ],
+        }, ],
     },
-    { name: 'Профиль' }
+    { name: 'Профиль' },
 ];
 
-const visualArray = arr => {
+const visualArray = (arr) => {
     let emptyStr = `<ul>`;
-    arr.forEach((elem, i) => {
+    arr.forEach(elem => {
         emptyStr += `<li>`;
-        if (elem.name) {
-            emptyStr += `<h1>${elem.name}</h1>`;
-        } else if (elem.children) {
-            emptyStr += visualArray(elem.children);
+        let name = elem.name;
+        let children = elem.children;
+        if (name) {
+            emptyStr += `<h1>${name}</h1>`;
+        }
+        if (children) {
+            emptyStr += visualArray(children);
         }
         emptyStr += `</li>`;
-
-
-        // arr[1].name.insertAdjacentHTML('afterbegin', 'I like js');
-    });
-    emptyStr += `</ul>`;
-    return emptyStr;
-    // console.log(emptyStr);
-};
-visualArray(navigation);
+    })
+    return emptyStr += `</ul>`;
+}
+document.body.innerHTML = visualArray(navigation);
