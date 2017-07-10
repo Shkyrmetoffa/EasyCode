@@ -88,6 +88,7 @@ let data = {
             firstSpan: 'null + {0:1}[0] + [,[1],][1][0]',
 
             categoryList: ['1', '2', 'undefined', 'NaN'],
+            rightAnswer: 2
         },
         {
             categoryName: 'Что выведет этот код?',
@@ -95,11 +96,13 @@ let data = {
             secondSpan: '(function() { alert(a) })()',
 
             categoryList: ['[object Array]', '[object Object]', '1,2', 'Error'],
+            rightAnswer: '[object Object]'
         },
         {
             categoryName: 'Яблоко стоит 1.15, апельсин стоит 2.30. Сколько стоят они вместе – чему равна сумма 1.15 + 2.30 с точки зрения JavaScript?',
 
-            categoryList: ['345', '345', '345', 'Ни один из вариантов выше'],
+            categoryList: ['3,45', '3.45', '345', 'Ни один из вариантов выше'],
+            rightAnswer: 'Ни один из вариантов выше'
         },
     ],
     button: 'Проверить мои результаты',
@@ -148,7 +151,7 @@ class Page {
                 labelFor.htmlFor = 'checkBox_' + i + '_' + j; //add id
                 labelFor.textContent = data.categories[i].categoryList[j];
                 checkBox.className = 'my-checkbox';
-                checkBox.type = 'checkBox';
+                checkBox.setAttribute('type', 'checkBox');
                 checkBox.id = 'checkBox_' + i + '_' + j;
 
                 listWrap.appendChild(listItem);
@@ -168,6 +171,27 @@ class Page {
 
         document.body.appendChild(buttonWrap);
         buttonWrap.appendChild(button);
+
+        button.onclick = function() {
+            let checked = document.querySelectorAll(':checked + label');
+            [...checked].filter((elem, i, arr) => {
+                data.categories.filter((val, i) => {
+                    console.log(elem.textContent == val.rightAnswer);
+                    // if (elem.textContent == val.rightAnswer) {
+                    //     const divAdd = document.createElement('div');
+                    //     divAdd.textContent = 'True';
+                    //     divAdd.style.color = 'green';
+                    //     button.insertAdjacentElement('beforebegin', divAdd);
+                    // }
+                    // if (elem.textContent !== val.rightAnswer) {
+                    //     const divAddFalse = document.createElement('div');
+                    //     divAddFalse.textContent = 'false';
+                    //     divAddFalse.style.color = 'green';
+                    //     button.insertAdjacentElement('beforebegin', divAddFalse);
+                    // }
+                });
+            });
+        }
     }
 
     pageInit() {
