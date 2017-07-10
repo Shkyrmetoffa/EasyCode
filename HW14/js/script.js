@@ -174,23 +174,14 @@ class Page {
 
         button.onclick = function() {
             let checked = document.querySelectorAll(':checked + label');
-            [...checked].filter((elem, i, arr) => {
-                data.categories.filter((val, i) => {
-                    console.log(elem.textContent == val.rightAnswer);
-                    // if (elem.textContent == val.rightAnswer) {
-                    //     const divAdd = document.createElement('div');
-                    //     divAdd.textContent = 'True';
-                    //     divAdd.style.color = 'green';
-                    //     button.insertAdjacentElement('beforebegin', divAdd);
-                    // }
-                    // if (elem.textContent !== val.rightAnswer) {
-                    //     const divAddFalse = document.createElement('div');
-                    //     divAddFalse.textContent = 'false';
-                    //     divAddFalse.style.color = 'green';
-                    //     button.insertAdjacentElement('beforebegin', divAddFalse);
-                    // }
-                });
+            [...checked].forEach((elem, i) => {
+                let ul = document.querySelectorAll('ul');
+                const divAdd = document.createElement('div');
+                divAdd.textContent = elem.textContent == data.categories[i].rightAnswer;
+                divAdd.style.color = 'red';
+                ul[i].insertAdjacentElement('beforeend', divAdd);
             });
+
         }
     }
 
