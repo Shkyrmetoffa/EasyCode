@@ -7,9 +7,8 @@
  * Последний элемент всегда лидер. Например в массиве [16,17,4,3,5,2] 
  * лидеры 17, 5 и 2.
  * */
-let solution = arr => {
+let solution = (arr, finalArr = []) => {
     let value = Math.max(...arr);
-    let finalArr = [];
     let newArr = [];
     finalArr.push(value);
     finalArr.concat(value);
@@ -19,7 +18,7 @@ let solution = arr => {
         }
     });
     if (newArr.length !== 0) {
-        solution(newArr);
+        solution(newArr, finalArr);
     }
     console.log(finalArr);
 };
@@ -38,10 +37,10 @@ solution([16, 17, 4, 3, 5, 2]); // === [17, 5, 2]
 */
 class Slider {
     constructor() {
-        let slides = document.querySelectorAll('li');
-        let currentSlide = 0;
-        let right = document.getElementById('right');
-        let left = document.getElementById('left');
+        this.slides = document.querySelectorAll('li');
+        this.currentSlide = 0;
+        this.right = document.getElementById('right');
+        this.left = document.getElementById('left');
     }
 
     goToSlide(n) {
@@ -56,14 +55,73 @@ class Slider {
         this.goToSlide(this.currentSlide - 1);
     }
     render() {
-        this.right.onclick = function() {
+        this.right.onclick = () => {
             // console.log(this);
             this.nextSlide();
         }
-        this.left.onclick = function() {
+        this.left.onclick = () => {
             this.previousSlide();
         }
     }
 }
 let slider = new Slider();
 slider.render();
+/*
+ * TASK 2
+ * Сделайте класс, который будет иметь метод topStyle
+ * метод topStyle принимает объект с CSS стилями и добавляет в <head>
+ *   новый элемент с данными стилями
+ *
+ *
+ * */
+class MakeCssStyle {
+    constructor() {}
+    topStyle(tag, obj) {
+        let newTag = document.createElement(`${tag}`);
+        let head = document.querySelector('head');
+        head.insertAdjacentElement('afterbegin', newTag);
+        let styleName;
+        let styleValue;
+        for (let key in obj) {
+            styleName = key;
+            styleValue = obj[key];
+        }
+        let styleA = `${styleName}`;
+        newTag.style[styleName] = styleValue;
+    }
+}
+let makeCssStyle = new MakeCssStyle();
+makeCssStyle.topStyle('fetch', { backgroundColor: 'blue' })
+
+
+/* @SUPER
+ *
+ * Напишите функцию которая будет преобразовывать CSS-свойство в 
+ * ликвидное JS свойство
+ *
+ * background-color -> backgroundColor
+ * margin-left -> marginLeft
+ * flex-basis -> flexBasis
+ *
+ * ...etc
+ *
+ * сделать через regExp
+ *
+ * */
+
+let pattern = (str) => {
+    let newStr = str.split(/-/);
+    let left = RegExp.leftContext;
+    let rightPart = RegExp["$'"];
+    let re = /[\S]{1}/;
+    let sym = rightPart.slice(1);
+    let results = rightPart.match(re);
+    let upper = results[0].toUpperCase();
+    let resulTo = rightPart.replace(re, upper);
+    let finalStr = left.concat(resulTo);
+
+    return finalStr;
+}
+console.log(pattern('margin-left'));
+console.log(pattern('background-color'));
+console.log(pattern('flex-basis'));
