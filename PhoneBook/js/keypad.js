@@ -1,29 +1,20 @@
-class Header {
+class Keypad {
     constructor() {}
     createHeader() {
         let headerTag = `<header class="header">`;
         headerTag += `<div class="container top-radius">
 			<h2>Keypad</h2>
 		</div>`;
-        headerTag += `</header`;
+        headerTag += `</header>`;
         return headerTag;
     }
-    render() {
-        let main = document.getElementsByClassName('main')[0];
-        main.innerHTML += this.createHeader();
-    }
-}
-let header = new Header();
-header.render();
-
-class Main {
-    constructor() {}
     createContainer(input, buttons) {
         return `<div class="container">${input}${buttons}</div>`;
     }
     createInput() {
         let input = `<div class="display"><span class="number"></span></div>`
-        let buttons = `<div class="keypad-holder>
+        let buttons = `<div class="buttons wrapper"><div class="keypad-holder>
+		
 				<button class="key"></button>
 				<button class="key">1</button>
 				<button class="key">2</button>
@@ -40,9 +31,8 @@ class Main {
 				<button class="clear">X</button>
 				<button class="phone"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span></span></button>
 				<button class="back"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
-                </div>`;
-
-        ;
+				</div>
+				</div>`;
         return this.createContainer(input, buttons);
     }
     createFooter() {
@@ -85,9 +75,9 @@ class Main {
     }
     render() {
         let main = document.getElementsByClassName('main')[0];
-        main.innerHTML += this.createInput() + this.createFooter();
+        main.innerHTML += `${this.createHeader()} ${this.createInput()} ${this.createFooter()}`;
         this.click();
     }
 }
-let main = new Main();
-main.render();
+let keypad = new Keypad();
+keypad.render();
