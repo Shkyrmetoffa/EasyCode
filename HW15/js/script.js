@@ -46,12 +46,13 @@ function open(arr, outArr = []) {
     return (outArr);
 }
 
-// open([
-//     [1, 2],
-//     [3, [4]], 5, 10
-// ]);
+console.log(open([
+    [1, 2],
+    [3, [4]], 5, 10
+]));
 console.log(open([25, 10, [10, [15]]]));
-// open([1, [2, [{ a: "b" }]]]);
+console.log(open([1, [2, [{ a: 'b' }]]]));
+
 /*
 Task 3
 */
