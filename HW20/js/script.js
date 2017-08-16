@@ -1,7 +1,5 @@
 class View {
     constructor() {
-        this.title = 'Ivanov';
-        this.header = 'Petr Ivanov';
         this.certificates = [{
                 'Common name': 'Sidor Stoyanow',
                 'Isuer': 'SKN "Privat"',
@@ -30,25 +28,27 @@ class View {
     }
 
     createList() {
-        return `<div class="list-group">
-                    <a class="btn btn-default" title="Go to Добавление сертификата" href="#" role="button">Добавить</a>
-                </div>`
+        return `<div class="col-lg-4 col-md-4">
+                    <div class="list-group"></div>
+                     <a class="btn btn-default" title="Go to Добавление сертификата" href="#" role="button">Добавить</a>
+                  </div>`
     }
     createLink(firstName, title) {
-        return `<a href="#" class="list-group-item" title="Go to Просмотр сертификата ${firstName}">${title}</a>`;;
+        return `<a href="#" class="list-group-item" title="Go to Просмотр сертификата ${firstName}">${title}</a>`;
     }
     createTitle() {
         let div = document.querySelector(".list-group");
-        let a;
         this.certificates.forEach(elem => {
             let firstName = elem['Common name'].split(' ')[1];
-            a = this.createLink(firstName, elem['Common name']);
-            return div.append(a);
+            let a = this.createLink(firstName, elem['Common name']);
+            div.innerHTML = div.innerHTML + a;
         });
-        console.log(a);
+
     }
     createDetailsBlock() {
-        return `<div class="jumbotron"> Выберите сертификат для просмотра информации
+        return `<div class="col-lg-4 col-md-4">
+        <div class="jumbotron"> Выберите сертификат для просмотра информации
+                </div>
                 </div>`
     }
 
@@ -57,6 +57,7 @@ class View {
         let details = document.querySelector(".jumbotron");
 
         button.addEventListener('click', () => {
+
             if (button.textContent == 'Добавить') {
                 button.textContent = 'Отменить';
                 details.style.border = '1px dashed grey';
@@ -68,11 +69,19 @@ class View {
             }
         })
     }
+    clickTitle() {
+        let listGroup = document.querySelector(".list-group");
+        listGroup.addEventListener('click', (e) => {
+            if (e.target.tagName == "A") {
+                e.target.innerHTML += `<i class="glyphicon glyphicon-triangle-right pull-right"></i>`;
+            };
+        })
+    }
     render() {
-        let app = document.querySelector('.app');
-        // console.log(div);
+        let app = document.querySelector('.row');
         app.innerHTML = this.createList() + this.createDetailsBlock();
         this.createTitle();
+        this.clickTitle();
         this.changeButtonState();
     }
 }

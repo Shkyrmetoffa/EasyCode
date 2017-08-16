@@ -1,25 +1,23 @@
-.app {
-    width: 80%;
+/*.app {
+    width: 60%;
     margin: 50px auto;
+    overflow: hidden;
 }
 
-.list-group {
+.side-bar {
     width: 30%;
     float: left;
-}
-
-.btn-default {
-    margin-top: 40px;
-    display: block;
-    text-align: center;
 }
 
 .jumbotron {
-    float: left;
-    margin-left: 50px;
-    width: 30%;
+    float: right;
+    width: 50%;
     border: 1px solid grey;
     text-align: center;
-    vertical-align: top;
     color: #555;
+}*/
+
+.row {
+    width: 80%;
+    margin: 50px auto;
 }
