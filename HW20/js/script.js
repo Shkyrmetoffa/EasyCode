@@ -57,7 +57,6 @@ class View {
         let details = document.querySelector(".jumbotron");
 
         button.addEventListener('click', () => {
-
             if (button.textContent == 'Добавить') {
                 button.textContent = 'Отменить';
                 details.style.border = '1px dashed grey';
@@ -69,11 +68,24 @@ class View {
             }
         })
     }
+    checkedClick(e) {
+        let elem = document.querySelector(".pull-right");
+        e.target.innerHTML += `<i class="glyphicon glyphicon-triangle-right pull-right"></i>`;
+        if (elem) {
+            elem.remove();
+        }
+    }
+    showDetails() {
+        let details = document.querySelector(".jumbotron");
+
+        console.log(details);
+    }
     clickTitle() {
         let listGroup = document.querySelector(".list-group");
         listGroup.addEventListener('click', (e) => {
             if (e.target.tagName == "A") {
-                e.target.innerHTML += `<i class="glyphicon glyphicon-triangle-right pull-right"></i>`;
+                this.checkedClick(e);
+                this.showDetails();
             };
         })
     }
